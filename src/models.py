@@ -8,6 +8,11 @@ from eralchemy import render_er
 
 Base = declarative_base()
 
+class Login(Base):
+        __tablename__ = 'login'
+    # Here we define columns for the table user
+    # Notice that each column is also a normal Python instance attribute.    
+
 class User(Base):
     __tablename__ = 'User'
     # Here we define columns for the table user
