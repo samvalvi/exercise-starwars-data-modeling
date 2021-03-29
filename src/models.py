@@ -8,26 +8,22 @@ from eralchemy import render_er
 
 Base = declarative_base()
 
-class Login(Base):
-        __tablename__ = 'login'
-    # Here we define columns for the table user
-    # Notice that each column is also a normal Python instance attribute.    
 
 class User(Base):
     __tablename__ = 'User'
     # Here we define columns for the table user
     # Notice that each column is also a normal Python instance attribute.
     id = Column(Integer, primary_key=True)
-    name = Column(String(250), nullable=False)
-    email = Column(String(250), nullable=False)
-    password= Column(String(250), nullable=False)
+    username = Column(String(200), nullable=False)
+    firstname = Column(String(100), nullable=False)
+    lastname = Column(String(100), nullable=False)
+    password = Column(String(100), nullable=False)
 
 class Planet(Base):
     __tablename__ = 'Planet'
     # Here we define columns for the table planet
     # Notice that each column is also a normal Python instance attribute.
     id=Column(Integer, primary_key=True)
-    favorite_id=Column(Integer, ForeignKey('Favorite.id'))
     name=Column(String(250), nullable=False)
     climate=Column(String(250), nullable=False)
     population=Column(Integer, nullable=False)
@@ -40,7 +36,6 @@ class Character(Base):
     # Here we define columns for the table character
     # Notice that each column is also a normal Python instance attribute.
     id=Column(Integer, primary_key=True)
-    favorite_id=Column(Integer, ForeignKey('Favorite.id'))
     name=Column(String(250), nullable=False)
     birth=Column(String(250), nullable=False)
     gender=Column(String(250), nullable=False)
@@ -56,6 +51,9 @@ class Favorite(Base):
     user_id=Column(Integer, ForeignKey('User.id'))
     planet_id=Column(Integer, ForeignKey('Planet.id'))
     character_id=Column(Integer, ForeignKey('Character.id'))
+    user = relationship(User)
+    planet = relationship(Planet)
+    character = relationship(Character)
 
     def tod_dict(self):
         return {}
